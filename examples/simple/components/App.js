@@ -1,35 +1,139 @@
 import React, { createClass } from 'react';
 import { Textfit } from 'react-textfit';
 
+const inlineStyle = {
+    height: 400
+};
+
 export default createClass({
 
     displayName: 'App',
 
+    getInitialState() {
+        return {
+            text: 'Edit this text!',
+            mode: 'multi',
+            forceSingleModeWidth: true,
+            perfectFit: true
+        };
+    },
+
+    handleChangeText(e) {
+        const text = e.target.value;
+        this.setState({ text });
+    },
+
+    handleChangeMode(e) {
+        const mode = e.target.value;
+        this.setState({ mode });
+    },
+
+    handleChangeForceWidth(e) {
+        const forceSingleModeWidth = e.target.checked;
+        this.setState({ forceSingleModeWidth });
+    },
+
+    handleChangePerfectFit(e) {
+        const perfectFit = e.target.checked;
+        this.setState({ perfectFit });
+    },
+
     render() {
+        const { text, mode, forceSingleModeWidth, perfectFit } = this.state;
         return (
             <div>
+                <h1 className="headline">react-textfit</h1>
+                <h2 className="headline">Examples</h2>
                 <div className="row">
-                    <div className="column">
-                        <Textfit style={{ height: 300 }} className="box">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </Textfit>
-                    </div>
-                    <div className="column">
-
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="column">
-                        <Textfit mode="single" className="box box-fat">
-                            Lorem ipsum dolor sit amet
+                    <div className="column-100">
+                        <Textfit
+                            mode="single"
+                            max={500}
+                            className="box box-fat">
+                            Fat headlines!
                         </Textfit>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column">
-                        <Textfit text="Lorem ipsum" max={500} style={{ height: 400 }} className="box box-fat">
-                            {text => text}
+                    <div className="column-25">
+                        <Textfit style={inlineStyle}>
+                            Multi line paragraphs at all sizes!
                         </Textfit>
+                    </div>
+                    <div className="column-25">
+                        <Textfit style={inlineStyle}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                        </Textfit>
+                    </div>
+                    <div className="column-25">
+                        <Textfit style={inlineStyle}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+                        </Textfit>
+                    </div>
+                    <div className="column-25">
+                        <Textfit style={inlineStyle}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                        </Textfit>
+                    </div>
+                </div>
+                <h2 className="headline">Playground</h2>
+                <div className="row">
+                    <div className="column-50">
+                        <Textfit
+                            mode={mode}
+                            forceSingleModeWidth={forceSingleModeWidth}
+                            perfectFit={perfectFit}
+                            style={inlineStyle}
+                            max={500}
+                            className="box box-fat">
+                            {text}
+                        </Textfit>
+                    </div>
+                    <div className="column-50 playground">
+                        <textarea rows="8" value={text} onChange={this.handleChangeText}/>
+                        <div className="row">
+                            <div className="column-50"><strong>Mode</strong></div>
+                            <div className="column-50">
+                                <select value={mode} onChange={this.handleChangeMode}>
+                                    <option value="multi">Multi line</option>
+                                    <option value="single">Single line</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column-50">
+                                <strong>Force width</strong><br/>
+                                <small>(only single mode)</small>
+                            </div>
+                            <div className="column-50">
+                                <label>
+                                    <input
+                                        disabled={mode === 'multi'}
+                                        type="checkbox"
+                                        value={true}
+                                        checked={forceSingleModeWidth}
+                                        onChange={this.handleChangeForceWidth}/>
+                                    {' '}
+                                    Force width
+                                </label>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="column-50">
+                                <strong>Perfect fit</strong>
+                            </div>
+                            <div className="column-50">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value={true}
+                                        checked={perfectFit}
+                                        onChange={this.handleChangePerfectFit}/>
+                                    {' '}
+                                    Perfect fit
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

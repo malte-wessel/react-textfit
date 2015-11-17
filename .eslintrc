@@ -15,7 +15,8 @@
     "react/jsx-boolean-value": 0,
     "react/no-multi-comp": 0,
     "react/prop-types": 0,
-    "id-length": 0
+    "id-length": 0,
+    "no-console": 0
   },
   "plugins": [
     "react"
