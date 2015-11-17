@@ -1,0 +1,19 @@
+{
+  "extends": "rackt",
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "indent": [2, 4],
+    "comma-dangle": 0,
+    "semi": 0
+  },
+  "plugins": [
+    "react"
+  ]
+}
