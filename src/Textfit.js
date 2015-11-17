@@ -181,7 +181,8 @@ export default createClass({
             // Make sure fontSize is always greater than 0
             stepCallback => {
                 if (mid > 0) return stepCallback();
-                this.setState({ fontSize: 1 }, stepCallback);
+                mid = 1;
+                this.setState({ fontSize: mid }, stepCallback);
             }
         ], err => {
             // err will be true, if another process was triggered

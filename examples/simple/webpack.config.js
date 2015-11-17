@@ -9,10 +9,7 @@ if(process.env.NODE_ENV === 'development') {
     );
 }
 
-var plugins = [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-];
+var plugins = [];
 if(process.env.NODE_ENV === 'production') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
@@ -20,6 +17,11 @@ if(process.env.NODE_ENV === 'production') {
 	            warnings: false
 	        }
 	    })
+    );
+} else {
+    plugins.push(
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     );
 }
 
@@ -47,7 +49,7 @@ loaders.push({
 });
 
 module.exports = {
-    devtool: 'eval',
+    devtool: process.env.NODE_ENV === 'development' ? 'eval': undefined,
     entry: entry.concat('./index'),
     output: {
         path: path.join(__dirname, 'dist'),
