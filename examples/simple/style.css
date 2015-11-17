@@ -1,10 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
+
 body {
-    font-family: sans-serif;
+    background: #eee;
+    font-family: 'Lato', sans-serif;
     line-height: 1.5;
 }
 
 .container {
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -12,4 +15,30 @@ body {
     .container {
         width: 100%;
     }
+}
+
+.row {
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.column + .column {
+    margin-left: 30px;
+}
+
+.box {
+    color: #1E2225;
+    padding: 30px;
+    background: #fff;
+}
+
+.box-fat {
+    text-transform: uppercase;
+    font-weight: 800;
 }

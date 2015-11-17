@@ -14,6 +14,14 @@ export default function throttle(func, wait) {
     let timeoutID;
     let last = 0;
 
+    function call() {
+        timeoutID = 0;
+        last = +new Date();
+        rtn = func.apply(ctx, args);
+        ctx = null;
+        args = null;
+    }
+
     return function throttled() {
         ctx = this;
         args = arguments;
@@ -24,12 +32,4 @@ export default function throttle(func, wait) {
         }
         return rtn;
     };
-
-    function call() {
-        timeoutID = 0;
-        last = +new Date();
-        rtn = func.apply(ctx, args);
-        ctx = null;
-        args = null;
-    }
 }

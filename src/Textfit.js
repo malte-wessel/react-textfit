@@ -1,7 +1,17 @@
 import React, { createClass, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
+import series from './utils/series';
 import whilst from './utils/whilst';
 import throttle from './utils/throttle';
+import { innerWidth, innerHeight } from './utils/innerSize';
+
+function assertElementFitsWidth(el, width) {
+    return el.scrollWidth <= width;
+}
+
+function assertElementFitsHeight(el, height) {
+    return el.scrollHeight <= height;
+}
 
 export default createClass({
 
@@ -30,14 +40,14 @@ export default createClass({
         };
     },
 
-    componentWillMount() {
-        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
-    },
-
     getInitialState() {
         return {
             ready: false
         };
+    },
+
+    componentWillMount() {
+        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
     },
 
     componentDidMount() {
@@ -54,7 +64,6 @@ export default createClass({
     handleWindowResize() {
         const { ready } = this.state;
         if (!ready) return;
-        console.log('resize');
         this.setState({ ready: false }, () => this.process());
     },
 
@@ -62,52 +71,49 @@ export default createClass({
         const { min, max, mode } = this.props;
         const el = findDOMNode(this);
         const { wrapper } = this.refs;
-        const originalWidth = el.clientWidth;
-        const originalHeight = el.clientHeight;
+
+        const originalWidth = innerWidth(el);
+        const originalHeight = innerHeight(el);
 
         const ready = fontSize => {
             if (!this.mounted) return;
             this.setState({ ready: true, fontSize }, () => callback && callback(fontSize));
-        }
+        };
 
         const test = mode === 'multi'
-            ? () => wrapper.scrollHeight <= originalHeight
-            : () => wrapper.scrollWidth <= originalWidth;
+            ? () => assertElementFitsHeight(wrapper, originalHeight)
+            : () => assertElementFitsWidth(wrapper, originalWidth);
 
         const testOverflow = mode === 'multi'
-            ? () => wrapper.scrollHeight > originalHeight
-            : () => wrapper.scrollWidth > originalWidth;
+            ? () => !assertElementFitsHeight(wrapper, originalHeight)
+            : () => !assertElementFitsWidth(wrapper, originalWidth);
 
         // Step 1:
         // Binary search to fit the element's height (multi line) / width (single line)
-
         let mid;
         let low = min;
         let high = max;
 
         whilst(
             () => this.mounted && low <= high,
-            callback => {
+            stepCallback => {
                 mid = parseInt((low + high) / 2, 10);
                 this.setState({ fontSize: mid }, () => {
                     if (test()) low = mid + 1;
                     else high = mid - 1;
-                    callback();
+                    stepCallback();
                 });
             },
-            () => {
+            () =>
                 // Step 2:
                 // Sometimes the text still does not fit perfectly the element's bounds.
                 // Therefore we decrease the font size until it fits.
                 // This will only take a few iterations, so it's fine here.
                 whilst(
                     () => this.mounted && testOverflow(),
-                    callback => {
-                        this.setState({ fontSize: --mid }, callback);
-                    },
+                    stepCallback => this.setState({ fontSize: --mid }, stepCallback),
                     () => ready(mid)
-                );
-            }
+                )
         );
     },
 
