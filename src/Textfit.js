@@ -193,7 +193,6 @@ export default createClass({
     },
 
     render() {
-        console.log('render');
         const { children, text, style, min, max, mode, ...props } = this.props;
         const { fontSize } = this.state;
         const finalStyle = {
