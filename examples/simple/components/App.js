@@ -42,7 +42,22 @@ export default createClass({
         const { text, mode, forceSingleModeWidth, perfectFit } = this.state;
         return (
             <div>
-                <h1 className="headline">react-textfit</h1>
+                <h1 className="headline">
+                    react-textfit
+                    <a href="https://github.com/malte-wessel/react-textfit" target="_blank" style={{float: 'right'}}>
+                        <i className="fa fa-github"/>
+                    </a>
+                </h1>
+                <div className="row">
+                    <div className="column-100">
+                        <ul>
+                            <li>fit <strong>headlines and paragraphs</strong> into any element</li>
+                            <li><strong>fast:</strong> uses binary search for efficiently find the correct fit</li>
+                            <li><strong>100%</strong> react-godness</li>
+                            <li>works with <strong>any style</strong> configuration (line-height, padding, ...)</li>
+                        </ul>
+                    </div>
+                </div>
                 <h2 className="headline">Examples</h2>
                 <div className="row">
                     <div className="column-100">
