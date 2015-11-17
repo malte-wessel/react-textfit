@@ -53,7 +53,7 @@ export default createClass({
                         <ul>
                             <li>fit <strong>headlines and paragraphs</strong> into any element</li>
                             <li><strong>fast:</strong> uses binary search for efficiently find the correct fit</li>
-                            <li><strong>100%</strong> react-godness</li>
+                            <li><strong>100%</strong> react-goodness</li>
                             <li>works with <strong>any style</strong> configuration (line-height, padding, ...)</li>
                         </ul>
                     </div>
