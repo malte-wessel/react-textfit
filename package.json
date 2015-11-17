@@ -1,7 +1,7 @@
 {
   "name": "react-textfit",
   "version": "0.1.2",
-  "description": "React textfit component",
+  "description": "React component to fit headlines and paragraphs into any element",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
@@ -16,7 +16,11 @@
     "url": "https://github.com/malte-wessel/react-textfit.git"
   },
   "keywords": [
-    "textfit"
+      "textfit",
+      "fittext",
+      "text",
+      "react",
+      "react-component"
   ],
   "author": "Malte Wessel",
   "license": "MIT",
