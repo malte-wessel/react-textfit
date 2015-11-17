@@ -12,10 +12,11 @@
     "url": "https://github.com/malte-wessel/react-textfit.git"
   },
   "keywords": [
-    "scroll",
-    "scroller",
-    "scrollbars",
-    "react"
+    "textfit",
+    "fittext",
+    "text",
+    "react",
+    "react-component"
   ],
   "license": "MIT",
   "bugs": {

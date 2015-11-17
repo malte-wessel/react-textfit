@@ -1,6 +1,6 @@
 import expect from 'expect';
 
-describe('Scrollbars', () => {
+describe('Textfit', () => {
     it('works', () => {
         expect(true).toBe(true);
     });

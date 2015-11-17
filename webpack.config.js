@@ -29,7 +29,7 @@ module.exports = {
         }]
     },
     output: {
-        library: 'react-custom-scrollbars',
+        library: 'react-textfit',
         libraryTarget: 'umd'
     },
     plugins: plugins,
