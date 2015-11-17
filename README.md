@@ -7,7 +7,7 @@ react-textfit
 
 * fit **headlines and paragraphs** into any element
 * **fast:** uses binary search for efficiently find the correct fit
-* **100%** react-godness
+* **100%** react-goodness
 * works with **any style** configuration (line-height, padding, ...)
 * **[check out the demo](http://malte-wessel.github.io/react-textfit/)**
 
