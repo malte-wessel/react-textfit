@@ -53,7 +53,8 @@ export default createClass({
 
     getInitialState() {
         return {
-            fontSize: null
+            fontSize: null,
+            ready: false
         };
     },
 
@@ -69,15 +70,15 @@ export default createClass({
         this.process();
     },
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (!this.ready) return true;
-        const dataChanged = !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
-        return dataChanged;
+    componentWillReceiveProps(nextProps) {
+        if (shallowEqual(this.props, nextProps)) return;
+        this.process();
     },
 
-    componentDidUpdate() {
-        if (!this.ready) return;
-        this.process();
+    shouldComponentUpdate(nextProps, nextState) {
+        const { ready } = this.state;
+        if (!ready) return true;
+        return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
     },
 
     componentWillUnmount() {
@@ -113,7 +114,7 @@ export default createClass({
 
         const pid = uniqueId();
         this.pid = pid;
-        this.ready = false;
+
         const shouldCancelProcess = () => pid !== this.pid;
 
         const testPrimary = mode === 'multi'
@@ -127,6 +128,8 @@ export default createClass({
         let mid;
         let low = min;
         let high = max;
+
+        this.setState({ ready: false});
 
         series([
             // Step 1:
@@ -194,21 +197,20 @@ export default createClass({
         ], err => {
             // err will be true, if another process was triggered
             if (err) return;
-            this.ready = true;
-            onReady(mid);
+            this.setState({ ready: true }, () => onReady(mid));
         });
     },
 
     render() {
         const { children, text, style, min, max, mode, ...props } = this.props;
-        const { fontSize } = this.state;
+        const { fontSize, ready } = this.state;
         const finalStyle = {
             ...style,
             fontSize: fontSize
         };
 
         const wrapperStyle = {
-            display: 'inline-block'
+            display: ready ? 'block' : 'inline-block'
         };
         if (mode === 'single') wrapperStyle.whiteSpace = 'nowrap';
 
@@ -216,7 +218,9 @@ export default createClass({
             <div style={finalStyle} {...props}>
                 <span ref="wrapper" style={wrapperStyle}>
                     {!!text && typeof children === 'function'
-                        ? children(text)
+                        ? ready
+                            ? children(text)
+                            : text
                         : children
                     }
                 </span>
