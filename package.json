@@ -1,6 +1,6 @@
 {
   "name": "react-textfit",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React component to fit headlines and paragraphs into any element",
   "main": "lib/index.js",
   "scripts": {
