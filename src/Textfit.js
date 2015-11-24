@@ -70,15 +70,11 @@ export default createClass({
         this.process();
     },
 
-    componentWillReceiveProps(nextProps) {
-        if (shallowEqual(this.props, nextProps)) return;
-        this.process();
-    },
-
-    shouldComponentUpdate(nextProps, nextState) {
+    componentDidUpdate(prevProps) {
         const { ready } = this.state;
-        if (!ready) return true;
-        return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
+        if (!ready) return;
+        if (shallowEqual(this.props, prevProps)) return;
+        this.process();
     },
 
     componentWillUnmount() {
@@ -217,7 +213,7 @@ export default createClass({
         return (
             <div style={finalStyle} {...props}>
                 <span ref="wrapper" style={wrapperStyle}>
-                    {!!text && typeof children === 'function'
+                    {text && typeof children === 'function'
                         ? ready
                             ? children(text)
                             : text
