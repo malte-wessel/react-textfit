@@ -8,11 +8,13 @@ import uniqueId from './utils/uniqueId';
 import { innerWidth, innerHeight } from './utils/innerSize';
 
 function assertElementFitsWidth(el, width) {
-    return el.scrollWidth <= width;
+    // -1: temporary bugfix, will be refactored soon
+    return el.scrollWidth - 1 <= width;
 }
 
 function assertElementFitsHeight(el, height) {
-    return el.scrollHeight <= height;
+    // -1: temporary bugfix, will be refactored soon
+    return el.scrollHeight - 1 <= height;
 }
 
 function noop() {}
