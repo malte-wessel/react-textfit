@@ -100,12 +100,12 @@ export default createClass({
         const originalWidth = innerWidth(el);
         const originalHeight = innerHeight(el);
 
-        if (originalHeight <= 0) {
+        if (originalHeight <= 0 || isNaN(originalHeight)) {
             console.warn('Can not process element without height. Make sure the element is displayed and has a static height.');
             return;
         }
 
-        if (originalWidth <= 0) {
+        if (originalWidth <= 0 || isNaN(originalWidth)) {
             console.warn('Can not process element without width. Make sure the element is displayed and has a static width.');
             return;
         }
