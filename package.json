@@ -16,11 +16,11 @@
     "url": "https://github.com/malte-wessel/react-textfit.git"
   },
   "keywords": [
-      "textfit",
-      "fittext",
-      "text",
-      "react",
-      "react-component"
+    "textfit",
+    "fittext",
+    "text",
+    "react",
+    "react-component"
   ],
   "author": "Malte Wessel",
   "license": "MIT",
@@ -51,5 +51,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "process": "^0.11.9"
+  }
 }
