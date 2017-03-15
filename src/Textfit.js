@@ -201,6 +201,7 @@ export default createClass({
 
     render() {
         const { children, text, style, min, max, mode, ...props } = this.props;
+        const { forceSingleModeWidth, perfectFit, throttle, autoResize, onReady, ...divProps } = props;
         const { fontSize, ready } = this.state;
         const finalStyle = {
             ...style,
@@ -213,7 +214,7 @@ export default createClass({
         if (mode === 'single') wrapperStyle.whiteSpace = 'nowrap';
 
         return (
-            <div style={finalStyle} {...props}>
+            <div style={finalStyle} {...divProps}>
                 <span ref="wrapper" style={wrapperStyle}>
                     {text && typeof children === 'function'
                         ? ready
