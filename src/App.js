@@ -5,7 +5,7 @@ import Textfit from './components/TextFit'
 export default class App extends Component {
   state = {
     text: 'Edit this text!',
-    mode: 'multi',
+    isSingleLine: false,
     min: 13,
     max: 100,
   }
@@ -15,7 +15,7 @@ export default class App extends Component {
   }
 
   handleChangeMode = (e) => {
-    this.setState({ mode: e.target.value })
+    this.setState({ isSingleLine: e.target.value === 'single' })
   }
 
   handleChangeMin = (e) => {
@@ -34,12 +34,8 @@ export default class App extends Component {
     this.setState({ max: value })
   }
 
-  handleChangePerfectFit = (e) => {
-    this.setState({ perfectFit: e.target.checked })
-  }
-
   render() {
-    const { text, mode, perfectFit } = this.state
+    const { text, isSingleLine } = this.state
 
     const inlineStyle = {
       height: 400,
@@ -82,7 +78,7 @@ export default class App extends Component {
         <h2 className="headline">Examples</h2>
         <div className="row">
           <div className="column-100">
-            <Textfit mode="single" max={500} className="box box-fat">
+            <Textfit isSingleLine max={500} className="box box-fat">
               <div style={{ fontSize: '26px' }}>
                 Fat headlines!
               </div>
@@ -115,7 +111,7 @@ export default class App extends Component {
         <div className="row">
           <div className="column-50">
             <Textfit
-              mode={mode}
+              isSingleLine={isSingleLine}
               style={inlineStyle}
               min={this.state.min}
               max={this.state.max ? this.state.max : null}
@@ -129,7 +125,7 @@ export default class App extends Component {
             <div className="row">
               <div className="column-50"><strong>Mode</strong></div>
               <div className="column-50">
-                <select value={mode} onChange={this.handleChangeMode}>
+                <select value={isSingleLine} onChange={this.handleChangeMode}>
                   <option value="multi">Multi line</option>
                   <option value="single">Single line</option>
                 </select>

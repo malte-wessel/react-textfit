@@ -35,7 +35,7 @@ export default class Textfit extends Component {
     /**
      * are we dealing with only a single line of text?
      */
-    mode: PropTypes.oneOf(['single', 'multi']),
+    isSingleLine: PropTypes.bool,
     /**
      * a function to be called when the sizing is done. The final size value will be provided.
      */
@@ -44,7 +44,7 @@ export default class Textfit extends Component {
 
   static defaultProps = {
     min: 13,
-    mode: 'multi',
+    isSingleLine: false,
   }
 
   state = {
@@ -84,7 +84,7 @@ export default class Textfit extends Component {
   process = () => {
     const {
       min,
-      mode,
+      isSingleLine,
       onReady,
     } = this.props
 
@@ -116,13 +116,13 @@ export default class Textfit extends Component {
 
     const shouldCancelProcess = () => pid !== this.pid
 
-    const testPrimary = mode === 'multi'
-      ? () => assertElementFitsHeight(wrapper, originalHeight)
-      : () => assertElementFitsWidth(wrapper, originalWidth)
-
-    const testSecondary = mode === 'multi'
+    const testPrimary = isSingleLine
       ? () => assertElementFitsWidth(wrapper, originalWidth)
       : () => assertElementFitsHeight(wrapper, originalHeight)
+
+    const testSecondary = isSingleLine
+      ? () => assertElementFitsHeight(wrapper, originalHeight)
+      : () => assertElementFitsWidth(wrapper, originalWidth)
 
     let mid
     let low = min
@@ -202,7 +202,7 @@ export default class Textfit extends Component {
       style,
       min,
       max,
-      mode,
+      isSingleLine,
       onReady,
       ...otherProps
     } = this.props
@@ -214,8 +214,6 @@ export default class Textfit extends Component {
       fontSize: fontSize,
       overflowY: this.state.shouldScroll ? 'auto' : 'clip',
     }
-
-    const isSingleLine = mode === 'single'
 
     const wrapperStyle = {
       display: ready ? 'block' : 'inline-block',
