@@ -50,6 +50,7 @@ export default class Textfit extends Component {
   state = {
     fontSize: null,
     ready: false,
+    shouldScroll: false,
   }
 
   componentWillMount = () => {
@@ -58,8 +59,6 @@ export default class Textfit extends Component {
 
   componentDidMount = () => {
     window.addEventListener('resize', this.handleWindowResize)
-
-    console.log(parseFloat(window.getComputedStyle(this._root).fontSize))
 
     this.process()
   }
@@ -183,7 +182,11 @@ export default class Textfit extends Component {
       (err) => {
         // err will be true, if another process was triggered
         if (err) return
-        this.setState({ ready: true })
+
+        this.setState({
+          ready: true,
+          shouldScroll: innerHeight(wrapper) > originalHeight,
+        })
 
         if (onReady) {
           onReady(mid)
@@ -209,7 +212,7 @@ export default class Textfit extends Component {
     const finalStyle = {
       ...style,
       fontSize: fontSize,
-      // overflowY: 'auto',
+      overflowY: this.state.shouldScroll ? 'auto' : 'clip',
     }
 
     const isSingleLine = mode === 'single'
