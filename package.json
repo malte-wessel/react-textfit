@@ -1,16 +1,7 @@
 {
   "name": "react-textfit",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "React component to fit headlines and paragraphs into any element",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "babel src --out-dir lib",
-    "lint": "eslint src test examples",
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
-    "test:watch": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
-    "postinstall": "npm run build"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/malte-wessel/react-textfit.git"
@@ -29,15 +20,40 @@
   },
   "homepage": "https://github.com/malte-wessel/react-textfit",
   "dependencies": {
-    "babel-cli": "^6.1.18",
-    "babel-core": "^6.0.0",
-    "babel-preset-es2015": "^6.0.0",
-    "babel-preset-react": "^6.0.0",
-    "babel-preset-stage-2": "^6.0.0",
-    "process": "^0.11.9"
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-preset-react-app": "^2.2.0",
+    "eslint": "^3.18.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "husky": "^0.13.2",
+    "lint-staged": "^3.4.0",
+    "prettier-eslint": "^4.3.2",
+    "prettier-eslint-cli": "^3.1.2",
+    "process": "^0.11.9",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-scripts": "0.9.5"
   },
-  "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "cross-env NODE_ENV=production babel src/components/TextFit.js -o TextFit.min.js",
+    "test": "react-scripts test --env=jsdom",
+    "prettier": "prettier-eslint --write \"src/**/*.js\"",
+    "postinstall": "npm run build",
+    "lint:staged": "lint-staged",
+    "precommit": "lint-staged"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "babel": {
+    "presets": "react-app",
+    "babelrc": false
   }
 }
