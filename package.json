@@ -40,7 +40,6 @@
     "test": "react-scripts test --env=jsdom",
     "prettier": "prettier-eslint --write \"src/**/*.js\"",
     "postinstall": "npm run build",
-    "lint:staged": "lint-staged",
     "precommit": "lint-staged"
   },
   "eslintConfig": {
@@ -55,5 +54,6 @@
   "babel": {
     "presets": "react-app",
     "babelrc": false
-  }
+  },
+  "main": "TextFit.min.js"
 }
