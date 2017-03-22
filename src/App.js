@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import Textfit from './components/TextFit'
+import Textfit from './components/Textfit'
 
 export default class App extends Component {
   state = {
     text: 'Edit this text!',
-    isSingleLine: false,
+    mode: 'single',
     min: 13,
     max: 100,
   }
@@ -15,7 +15,7 @@ export default class App extends Component {
   }
 
   handleChangeMode = (e) => {
-    this.setState({ isSingleLine: e.target.value === 'single' })
+    this.setState({ mode: e.target.value })
   }
 
   handleChangeMin = (e) => {
@@ -35,7 +35,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { text, isSingleLine } = this.state
+    const { text, mode } = this.state
 
     const inlineStyle = {
       height: 400,
@@ -111,7 +111,7 @@ export default class App extends Component {
         <div className="row">
           <div className="column-50">
             <Textfit
-              isSingleLine={isSingleLine}
+              isSingleLine={mode === 'single'}
               style={inlineStyle}
               min={this.state.min}
               max={this.state.max ? this.state.max : null}
@@ -125,7 +125,7 @@ export default class App extends Component {
             <div className="row">
               <div className="column-50"><strong>Mode</strong></div>
               <div className="column-50">
-                <select value={isSingleLine} onChange={this.handleChangeMode}>
+                <select value={mode} onChange={this.handleChangeMode}>
                   <option value="multi">Multi line</option>
                   <option value="single">Single line</option>
                 </select>
