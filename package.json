@@ -55,5 +55,5 @@
     "presets": "react-app",
     "babelrc": false
   },
-  "main": "dist/TextFit.js"
+  "main": "dist/index.js"
 }
