@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
-import shallowEqual from '../utils/shallowEqual'
-import series from '../utils/series'
-import whilst from '../utils/whilst'
-import throttle from '../utils/throttle'
-import uniqueId from '../utils/uniqueId'
-import { innerWidth, innerHeight } from '../utils/innerSize'
+import shallowEqual from './utils/shallowEqual'
+import series from './utils/series'
+import whilst from './utils/whilst'
+import throttle from './utils/throttle'
+import uniqueId from './utils/uniqueId'
+import { innerWidth, innerHeight } from './utils/innerSize'
 
 function assertElementFitsWidth(el, width) {
   // -1: temporary bugfix, will be refactored soon

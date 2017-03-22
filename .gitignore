@@ -16,4 +16,3 @@ dist
 .chrome
 npm-debug.log
 /yarn-error.log
-/TextFit.min.js

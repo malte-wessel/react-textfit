@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cross-env NODE_ENV=production babel src --out-file TextFit.min.js",
+    "build": "cross-env NODE_ENV=production babel src/components -d dist",
     "test": "react-scripts test --env=jsdom",
     "prettier": "prettier-eslint --write \"src/**/*.js\"",
     "postinstall": "npm run build",
@@ -55,5 +55,5 @@
     "presets": "react-app",
     "babelrc": false
   },
-  "main": "TextFit.min.js"
+  "main": "dist/TextFit.js"
 }
