@@ -34,7 +34,7 @@ import { Textfit } from 'react-textfit';
 class App extends Component {
   render() {
     return (
-      <Textfit mode="single">
+      <Textfit isSingleLine>
         Fat headline!
       </Textfit>
     );
@@ -42,7 +42,7 @@ class App extends Component {
 }
 ```
 
-#### Respect the element's height when using single lines
+#### Set a minimum size and show an ellipsis if the text overflows its container
 
 ```javascript
 import { Textfit } from 'react-textfit';
@@ -51,8 +51,8 @@ class App extends Component {
   render() {
     return (
       <Textfit
-        mode="single"
-        forceSingleModeWidth={false}>
+        isSingleLine
+        min={13}>
         Fat headline!
       </Textfit>
     );
@@ -68,7 +68,7 @@ import { Textfit } from 'react-textfit';
 class App extends Component {
   render() {
     return (
-      <Textfit mode="multi">
+      <Textfit>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </Textfit>
     );
@@ -83,9 +83,9 @@ class App extends Component {
 **Algorithm steps:**
 ```
 1. binary search to fit the element's width
-2. if forceSingleModeWidth=false and text overflows height
+2. if text overflows height
     2a. binary search to also fit the elements height
-3. if perfectFit=true and text still overflows width
+3. if text still overflows width
     3a. decrease font size until text fits element's width
 
 ```
@@ -97,8 +97,6 @@ class App extends Component {
 1. binary search to fit the element's height
 2. if text overflows width
     2a. binary search to also fit the elements width
-3. if perfectFit=true and text still overflows height
-    3a. decrease font size until text fits element's height
 
 ```
 
@@ -108,12 +106,9 @@ class App extends Component {
 
 #### Props
 
-* `mode` (single|multi) Algorithm to fit the text. Use single for headlines and multi for paragraphs. Default is `multi`.
-* `forceSingleModeWidth` (Boolean) When mode is single and forceSingleModeWidth is true, the element's height will be ignored. Default is `true`.
-* `perfectFit` (Boolean) When true, the text will always perfectly fit the element's bounds Default is `true`.
-* `min` (Number) Minimum font size in pixel. Default is `1`.
-* `max` (Number) Maximum font size in pixel. Default is `100`.
-* `throttle` (Number) Window resize throttle in milliseconds. Default is `50`.
+* `isSingleLine` (Boolean) Use for headlines, text will not wrap
+* `min` (Number) Minimum font size in pixel. Default is `13`.
+* `max` (Number) Maximum font size in pixel. Default is the current height of the container.
 * `onReady` (Function) Will be called when text is fitted.
 
 ## License

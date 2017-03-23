@@ -1,3 +1,5 @@
-import Textfit from './Textfit';
-export { Textfit };
-export default Textfit;
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, document.getElementById('root'))
