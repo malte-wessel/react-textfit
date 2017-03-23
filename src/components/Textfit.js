@@ -172,6 +172,20 @@ export default class Textfit extends Component {
           )
         },
         // Step 3
+        // Sometimes the text still overflows the elements bounds.
+        // We don't run this if we're already at the minimum size.
+        (stepCallback) => {
+          if (mid === min) return stepCallback()
+          whilst(
+            () => !testPrimary(),
+            (whilstCallback) => {
+              if (shouldCancelProcess()) return whilstCallback(true)
+              this.setState({ fontSize: --mid }, whilstCallback)
+            },
+            stepCallback,
+          )
+        },
+        // Step 4
         // Make sure fontSize is always greater than 0
         (stepCallback) => {
           if (mid > 0) return stepCallback()
