@@ -150,7 +150,7 @@ export default class Textfit extends Component {
             stepCallback,
           ),
         // Step 2:
-        // Binary search to fit the element's width (multi line)
+        // Binary search to fit the element's width (multi line) / height (single line)
         // in order to not fit the elements height and decrease the width
         (stepCallback) => {
           if (testSecondary()) return stepCallback()
@@ -196,9 +196,9 @@ export default class Textfit extends Component {
         if (mid <= 1) {
           mid = 1
         } else {
-          // subtract one from the size when using single line to decrease unwanted elipsis
-          if (isSingleLine) {
-            mid -= 1
+          // subtract from the size to decrease the occurance unwanted elipsis or scrollbars
+          if (mid > 2) {
+            mid -= 2
           }
         }
 
@@ -240,6 +240,7 @@ export default class Textfit extends Component {
       whiteSpace: isSingleLine ? 'nowrap' : 'normal',
       overflow: isSingleLine ? 'hidden' : 'visible',
       textOverflow: isSingleLine ? 'ellipsis' : 'clip',
+      lineHeight: isSingleLine ? 1 : 'auto',
     }
 
     return (

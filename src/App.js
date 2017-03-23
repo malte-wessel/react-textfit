@@ -78,10 +78,13 @@ export default class App extends Component {
         <h2 className="headline">Examples</h2>
         <div className="row">
           <div className="column-100">
-            <Textfit isSingleLine max={500} className="box box-fat">
-              <div style={{ fontSize: '26px' }}>
-                Fat headlines!
-              </div>
+            <Textfit
+              isSingleLine
+              max={500}
+              className="box box-fat"
+              style={{ height: 240 }}
+            >
+              Fat headlines!
             </Textfit>
           </div>
         </div>
