@@ -173,8 +173,10 @@ export default class Textfit extends Component {
         },
         // Step 3
         // Sometimes the text still overflows the elements bounds.
-        // We don't run this if we're already at the minimum size.
+        // Make sure we don't shrink anything if we're already at
+        // the min size.
         (stepCallback) => {
+          if (testPrimary()) return stepCallback()
           if (mid === min) return stepCallback()
           whilst(
             () => !testPrimary(),
@@ -185,21 +187,25 @@ export default class Textfit extends Component {
             stepCallback,
           )
         },
-        // Step 4
-        // Make sure fontSize is always greater than 0
-        (stepCallback) => {
-          if (mid > 0) return stepCallback()
-          mid = 1
-          this.setState({ fontSize: mid }, stepCallback)
-        },
       ],
       (err) => {
         // err will be true, if another process was triggered
         if (err) return
 
+        // make sure we're never 0
+        if (mid <= 1) {
+          mid = 1
+        } else {
+          // subtract one from the size when using single line to decrease unwanted elipsis
+          if (isSingleLine) {
+            mid -= 1
+          }
+        }
+
         this.setState({
+          fontSize: mid,
           ready: true,
-          shouldScroll: innerHeight(wrapper) > originalHeight,
+          shouldScroll: !isSingleLine && innerHeight(wrapper) > originalHeight,
         })
 
         if (onReady) {
