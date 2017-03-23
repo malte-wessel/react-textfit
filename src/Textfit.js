@@ -200,7 +200,23 @@ export default createClass({
     },
 
     render() {
-        const { children, text, style, min, max, mode, forceWidth, forceSingleModeWidth, perfectFit, throttle, autoResize, onReady, ...props } = this.props;
+        const {
+            children,
+            text,
+            style,
+            min,
+            max,
+            mode,
+            forceWidth,
+            forceSingleModeWidth,
+            perfectFit,
+            /* eslint-disable no-shadow */
+            throttle,
+            /* eslint-enable no-shadow */
+            autoResize,
+            onReady,
+            ...props
+        } = this.props;
         const { fontSize, ready } = this.state;
         const finalStyle = {
             ...style,
