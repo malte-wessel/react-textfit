@@ -40,17 +40,23 @@ export default class Textfit extends Component {
      * a function to be called when the sizing is done. The final size value will be provided.
      */
     onReady: PropTypes.func,
+    /**
+     * should element sizes be calculated on window resize?
+     */
+    calculateOnResize: PropTypes.bool,
   }
 
   static defaultProps = {
     min: 13,
     isSingleLine: false,
+    calculateOnResize: true,
   }
 
   state = {
     fontSize: null,
     ready: false,
     shouldScroll: false,
+    isMinSize: false,
   }
 
   componentWillMount = () => {
@@ -58,7 +64,9 @@ export default class Textfit extends Component {
   }
 
   componentDidMount = () => {
-    window.addEventListener('resize', this.handleWindowResize)
+    if (this.props.calculateOnResize) {
+      window.addEventListener('resize', this.handleWindowResize)
+    }
 
     this.process()
   }
@@ -187,23 +195,20 @@ export default class Textfit extends Component {
             stepCallback,
           )
         },
+        // Step 4
+        // Make sure fontSize is always greater than 0
+        (stepCallback) => {
+          if (mid > 0) return stepCallback()
+          mid = 1
+          this.setState({ fontSize: mid }, stepCallback)
+        },
       ],
       (err) => {
         // err will be true, if another process was triggered
         if (err) return
 
-        // make sure we're never 0
-        if (mid <= 1) {
-          mid = 1
-        } else {
-          // subtract from the size to decrease the occurance unwanted elipsis or scrollbars
-          if (mid > 2) {
-            mid -= 2
-          }
-        }
-
         this.setState({
-          fontSize: mid,
+          isMinSize: mid === min,
           ready: true,
           shouldScroll: !isSingleLine && innerHeight(wrapper) > originalHeight,
         })
@@ -227,7 +232,7 @@ export default class Textfit extends Component {
       ...otherProps
     } = this.props
 
-    const { fontSize, ready } = this.state
+    const { fontSize, ready, isMinSize } = this.state
 
     const finalStyle = {
       ...style,
@@ -238,8 +243,8 @@ export default class Textfit extends Component {
     const wrapperStyle = {
       display: ready ? 'block' : 'inline-block',
       whiteSpace: isSingleLine ? 'nowrap' : 'normal',
-      overflow: isSingleLine ? 'hidden' : 'visible',
-      textOverflow: isSingleLine ? 'ellipsis' : 'clip',
+      overflow: isMinSize && isSingleLine ? 'hidden' : 'visible',
+      textOverflow: isMinSize && isSingleLine ? 'ellipsis' : 'clip',
       lineHeight: isSingleLine ? 1 : 'auto',
     }
 
