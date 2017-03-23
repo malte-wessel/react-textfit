@@ -200,7 +200,7 @@ export default createClass({
     },
 
     render() {
-        const { children, text, style, min, max, mode, ...props } = this.props;
+        const { children, text, style, min, max, mode, forceWidth, forceSingleModeWidth, perfectFit, throttle, autoResize, onReady, ...props } = this.props;
         const { fontSize, ready } = this.state;
         const finalStyle = {
             ...style,
