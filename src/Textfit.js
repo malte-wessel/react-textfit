@@ -1,4 +1,4 @@
-import React, { createClass, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import shallowEqual from './utils/shallowEqual';
 import series from './utils/series';
@@ -19,11 +19,11 @@ function assertElementFitsHeight(el, height) {
 
 function noop() {}
 
-export default createClass({
+export default class Textfit extends Component {
 
-    displayName: 'Textfit',
+    static displayName = 'Textfit'
 
-    propTypes: {
+    static propTypes = {
         children: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.func
@@ -38,31 +38,29 @@ export default createClass({
         perfectFit: PropTypes.bool,
         throttle: PropTypes.number,
         onReady: PropTypes.func
-    },
+    }
 
-    getDefaultProps() {
-        return {
-            min: 1,
-            max: 100,
-            mode: 'multi',
-            forceSingleModeWidth: true,
-            perfectFit: true,
-            throttle: 50,
-            autoResize: true,
-            onReady: noop
-        };
-    },
+    static defaultProps = {
+        min: 1,
+        max: 100,
+        mode: 'multi',
+        forceSingleModeWidth: true,
+        perfectFit: true,
+        throttle: 50,
+        autoResize: true,
+        onReady: noop
+    }
 
-    getInitialState() {
-        return {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            ready: false,
             fontSize: null,
-            ready: false
         };
-    },
 
-    componentWillMount() {
-        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
-    },
+        this.handleWindowResize = throttle(() => this.process(), this.props.throttle);
+    }
 
     componentDidMount() {
         const { autoResize } = this.props;
@@ -70,14 +68,14 @@ export default createClass({
             window.addEventListener('resize', this.handleWindowResize);
         }
         this.process();
-    },
+    }
 
     componentDidUpdate(prevProps) {
         const { ready } = this.state;
         if (!ready) return;
         if (shallowEqual(this.props, prevProps)) return;
         this.process();
-    },
+    }
 
     componentWillUnmount() {
         const { autoResize } = this.props;
@@ -86,11 +84,7 @@ export default createClass({
         }
         // Setting a new pid will cancel all running processes
         this.pid = uniqueId();
-    },
-
-    handleWindowResize() {
-        this.process();
-    },
+    }
 
     process() {
         const { min, max, mode, forceSingleModeWidth, perfectFit, onReady } = this.props;
@@ -197,7 +191,7 @@ export default createClass({
             if (err) return;
             this.setState({ ready: true }, () => onReady(mid));
         });
-    },
+    }
 
     render() {
         const {
@@ -241,4 +235,4 @@ export default createClass({
             </div>
         );
     }
-});
+}

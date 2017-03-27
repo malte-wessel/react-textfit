@@ -1,42 +1,40 @@
-import React, { createClass } from 'react';
+import React, { Component } from 'react';
 import { Textfit } from 'react-textfit';
 
 const inlineStyle = {
     height: 400
 };
 
-export default createClass({
+export default class App extends Component {
 
-    displayName: 'App',
+    static displayName = 'App'
 
-    getInitialState() {
-        return {
-            text: 'Edit this text!',
-            mode: 'multi',
-            forceSingleModeWidth: true,
-            perfectFit: true
-        };
-    },
+    state = {
+        text: 'Edit this text!',
+        mode: 'multi',
+        forceSingleModeWidth: true,
+        perfectFit: true
+    }
 
-    handleChangeText(e) {
+    handleChangeText = (e) => {
         const text = e.target.value;
         this.setState({ text });
-    },
+    }
 
-    handleChangeMode(e) {
+    handleChangeMode = (e) => {
         const mode = e.target.value;
         this.setState({ mode });
-    },
+    }
 
-    handleChangeForceWidth(e) {
+    handleChangeForceWidth = (e) => {
         const forceSingleModeWidth = e.target.checked;
         this.setState({ forceSingleModeWidth });
-    },
+    }
 
-    handleChangePerfectFit(e) {
+    handleChangePerfectFit = (e) => {
         const perfectFit = e.target.checked;
         this.setState({ perfectFit });
-    },
+    }
 
     render() {
         const { text, mode, forceSingleModeWidth, perfectFit } = this.state;
@@ -154,4 +152,4 @@ export default createClass({
             </div>
         );
     }
-});
+}
