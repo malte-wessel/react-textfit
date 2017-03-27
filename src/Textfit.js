@@ -40,7 +40,7 @@ export default class Textfit extends Component {
         onReady: PropTypes.func
     }
 
-    static defaultProps= {
+    static defaultProps = {
         min: 1,
         max: 100,
         mode: 'multi',
@@ -51,13 +51,15 @@ export default class Textfit extends Component {
         onReady: noop
     }
 
-    state = {
-        fontSize: null,
-        ready: false
-    }
+    constructor(props, context) {
+        super(props, context);
 
-    componentWillMount() {
-        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
+        this.state = {
+            ready: false,
+            fontSize: null,
+        };
+
+        this.handleWindowResize = throttle(() => this.process(), this.props.throttle);
     }
 
     componentDidMount() {
@@ -82,10 +84,6 @@ export default class Textfit extends Component {
         }
         // Setting a new pid will cancel all running processes
         this.pid = uniqueId();
-    }
-
-    handleWindowResize() {
-        this.process();
     }
 
     process() {
