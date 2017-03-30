@@ -1,5 +1,4 @@
 import React, { createClass, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 import shallowEqual from './utils/shallowEqual';
 import series from './utils/series';
 import whilst from './utils/whilst';
@@ -94,8 +93,8 @@ export default createClass({
 
     process() {
         const { min, max, mode, forceSingleModeWidth, perfectFit, onReady } = this.props;
-        const el = findDOMNode(this);
-        const { wrapper } = this.refs;
+        const el = this._parent;
+        const wrapper = this._child;
 
         const originalWidth = innerWidth(el);
         const originalHeight = innerHeight(el);
@@ -229,8 +228,8 @@ export default createClass({
         if (mode === 'single') wrapperStyle.whiteSpace = 'nowrap';
 
         return (
-            <div style={finalStyle} {...props}>
-                <span ref="wrapper" style={wrapperStyle}>
+            <div ref={c => this._parent = c} style={finalStyle} {...props}>
+                <span ref={c => this._child = c} style={wrapperStyle}>
                     {text && typeof children === 'function'
                         ? ready
                             ? children(text)
