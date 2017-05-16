@@ -229,7 +229,7 @@ export default createClass({
         if (mode === 'single') wrapperStyle.whiteSpace = 'nowrap';
 
         return (
-            <div style={finalStyle} {...props}>
+            <div style={finalStyle}>
                 <span ref="wrapper" style={wrapperStyle}>
                     {text && typeof children === 'function'
                         ? ready
