@@ -52,6 +52,7 @@
     "react-dom": "^15.0.0"
   },
   "dependencies": {
-    "process": "^0.11.9"
+    "process": "^0.11.9",
+    "prop-types": "^15.5.10"
   }
 }

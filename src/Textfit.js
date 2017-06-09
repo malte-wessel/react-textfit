@@ -1,4 +1,5 @@
-import React, { createClass, PropTypes } from 'react';
+import React, { createClass } from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import shallowEqual from './utils/shallowEqual';
 import series from './utils/series';
