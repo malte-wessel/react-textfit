@@ -46,16 +46,16 @@ export default class TextFit extends React.Component {
         onReady: noop
     }
 
+    constructor(props) {
+        super(props);
+        if ('perfectFit' in props) {
+            console.warn('TextFit property perfectFit has been removed.');
+        }
+    }
+
     state = {
         fontSize: null,
         ready: false
-    }
-
-    constructor(props) {
-      super(props);
-      if ('perfectFit' in props) {
-        console.warn('TextFit property perfectFit has been removed.');
-      }
     }
 
     componentWillMount() {
@@ -190,7 +190,7 @@ export default class TextFit extends React.Component {
             if (err || shouldCancelProcess()) return;
             this.setState({ ready: true }, () => onReady(mid));
         });
-    };
+    }
 
     render() {
         const {
