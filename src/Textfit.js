@@ -175,6 +175,10 @@ export default class TextFit extends React.Component {
                 // so we do it here:
                 mid = Math.min(low, high);
 
+                // Ensure we hit the user-supplied limits
+                mid = Math.max(mid, min);
+                mid = Math.min(mid, max);
+
                 // Sanity check:
                 mid = Math.max(mid, 0);
 
