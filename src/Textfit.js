@@ -223,14 +223,14 @@ export default class TextFit extends React.Component {
 
         return (
             <div ref={c => this._parent = c} style={finalStyle} {...props}>
-                <span ref={c => this._child = c} style={wrapperStyle}>
+                <div ref={c => this._child = c} style={wrapperStyle}>
                     {text && typeof children === 'function'
                         ? ready
                             ? children(text)
                             : text
                         : children
                     }
-                </span>
+                </div>
             </div>
         );
     }
