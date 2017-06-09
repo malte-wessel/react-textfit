@@ -81,7 +81,7 @@ export default class TextFit extends React.Component {
         this.pid = uniqueId();
     }
 
-    handleWindowResize() {
+    handleWindowResize = () => {
         this.process();
     }
 

@@ -13,22 +13,22 @@ export default class App extends React.Component {
         perfectFit: true
     }
 
-    handleChangeText(e) {
+    handleChangeText = (e) => {
         const text = e.target.value;
         this.setState({ text });
     }
 
-    handleChangeMode(e) {
+    handleChangeMode = (e) => {
         const mode = e.target.value;
         this.setState({ mode });
     }
 
-    handleChangeForceWidth(e) {
+    handleChangeForceWidth = (e) => {
         const forceSingleModeWidth = e.target.checked;
         this.setState({ forceSingleModeWidth });
     }
 
-    handleChangePerfectFit(e) {
+    handleChangePerfectFit = (e) => {
         const perfectFit = e.target.checked;
         this.setState({ perfectFit });
     }
