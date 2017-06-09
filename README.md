@@ -85,9 +85,6 @@ class App extends Component {
 1. binary search to fit the element's width
 2. if forceSingleModeWidth=false and text overflows height
     2a. binary search to also fit the elements height
-3. if perfectFit=true and text still overflows width
-    3a. decrease font size until text fits element's width
-
 ```
 
 ### `multi`
@@ -97,9 +94,6 @@ class App extends Component {
 1. binary search to fit the element's height
 2. if text overflows width
     2a. binary search to also fit the elements width
-3. if perfectFit=true and text still overflows height
-    3a. decrease font size until text fits element's height
-
 ```
 
 ## API
@@ -110,7 +104,6 @@ class App extends Component {
 
 * `mode` (single|multi) Algorithm to fit the text. Use single for headlines and multi for paragraphs. Default is `multi`.
 * `forceSingleModeWidth` (Boolean) When mode is single and forceSingleModeWidth is true, the element's height will be ignored. Default is `true`.
-* `perfectFit` (Boolean) When true, the text will always perfectly fit the element's bounds Default is `true`.
 * `min` (Number) Minimum font size in pixel. Default is `1`.
 * `max` (Number) Maximum font size in pixel. Default is `100`.
 * `throttle` (Number) Window resize throttle in milliseconds. Default is `50`.

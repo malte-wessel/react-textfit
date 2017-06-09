@@ -9,8 +9,7 @@ export default class App extends React.Component {
     state = {
         text: 'Edit this text!',
         mode: 'multi',
-        forceSingleModeWidth: true,
-        perfectFit: true
+        forceSingleModeWidth: true
     }
 
     handleChangeText = (e) => {
@@ -28,13 +27,8 @@ export default class App extends React.Component {
         this.setState({ forceSingleModeWidth });
     }
 
-    handleChangePerfectFit = (e) => {
-        const perfectFit = e.target.checked;
-        this.setState({ perfectFit });
-    }
-
     render() {
-        const { text, mode, forceSingleModeWidth, perfectFit } = this.state;
+        const { text, mode, forceSingleModeWidth } = this.state;
         return (
             <div>
                 <h1 className="headline">
@@ -92,7 +86,6 @@ export default class App extends React.Component {
                         <Textfit
                             mode={mode}
                             forceSingleModeWidth={forceSingleModeWidth}
-                            perfectFit={perfectFit}
                             style={inlineStyle}
                             max={500}
                             className="box box-fat">
@@ -125,22 +118,6 @@ export default class App extends React.Component {
                                         onChange={this.handleChangeForceWidth}/>
                                     {' '}
                                     Force width
-                                </label>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="column-50">
-                                <strong>Perfect fit</strong>
-                            </div>
-                            <div className="column-50">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        value={true}
-                                        checked={perfectFit}
-                                        onChange={this.handleChangePerfectFit}/>
-                                    {' '}
-                                    Perfect fit
                                 </label>
                             </div>
                         </div>

@@ -32,7 +32,6 @@ export default class TextFit extends React.Component {
             'single', 'multi'
         ]),
         forceSingleModeWidth: PropTypes.bool,
-        perfectFit: PropTypes.bool,
         throttle: PropTypes.number,
         onReady: PropTypes.func
     }
@@ -42,7 +41,6 @@ export default class TextFit extends React.Component {
         max: 100,
         mode: 'multi',
         forceSingleModeWidth: true,
-        perfectFit: true,
         throttle: 50,
         autoResize: true,
         onReady: noop
@@ -51,6 +49,13 @@ export default class TextFit extends React.Component {
     state = {
         fontSize: null,
         ready: false
+    }
+
+    constructor(props) {
+      super(props);
+      if ('perfectFit' in props) {
+        console.warn('TextFit property perfectFit has been removed.');
+      }
     }
 
     componentWillMount() {
@@ -86,7 +91,7 @@ export default class TextFit extends React.Component {
     }
 
     process() {
-        const { min, max, mode, forceSingleModeWidth, perfectFit, onReady } = this.props;
+        const { min, max, mode, forceSingleModeWidth, onReady } = this.props;
         const el = this._parent;
         const wrapper = this._child;
 
@@ -149,7 +154,7 @@ export default class TextFit extends React.Component {
                 low = min;
                 high = mid;
                 return whilst(
-                    () => low <= high,
+                    () => low < high,
                     whilstCallback => {
                         if (shouldCancelProcess()) return whilstCallback(true);
                         mid = parseInt((low + high) / 2, 10);
@@ -164,25 +169,16 @@ export default class TextFit extends React.Component {
                 );
             },
             // Step 3
-            // Sometimes the text still overflows the elements bounds.
-            // If perfectFit is true, decrease fontSize until it fits.
+            // Limits
             stepCallback => {
-                if (!perfectFit) return stepCallback();
-                if (testPrimary()) return stepCallback();
-                whilst(
-                    () => !testPrimary(),
-                    whilstCallback => {
-                        if (shouldCancelProcess()) return whilstCallback(true);
-                        this.setState({ fontSize: --mid }, whilstCallback);
-                    },
-                    stepCallback
-                );
-            },
-            // Step 4
-            // Make sure fontSize is always greater than 0
-            stepCallback => {
-                if (mid > 0) return stepCallback();
-                mid = 1;
+                // We break the previous loop without updating mid for the final time,
+                // so we do it here:
+                mid = Math.min(low, high);
+
+                // Sanity check:
+                mid = Math.max(mid, 0);
+
+                if (shouldCancelProcess()) return stepCallback(true);
                 this.setState({ fontSize: mid }, stepCallback);
             }
         ], err => {
@@ -202,7 +198,6 @@ export default class TextFit extends React.Component {
             mode,
             forceWidth,
             forceSingleModeWidth,
-            perfectFit,
             /* eslint-disable no-shadow */
             throttle,
             /* eslint-enable no-shadow */
