@@ -187,7 +187,7 @@ export default class TextFit extends React.Component {
             }
         ], err => {
             // err will be true, if another process was triggered
-            if (err) return;
+            if (err || shouldCancelProcess()) return;
             this.setState({ ready: true }, () => onReady(mid));
         });
     };
