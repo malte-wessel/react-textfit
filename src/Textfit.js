@@ -21,10 +21,7 @@ function noop() {}
 
 export default class TextFit extends React.Component {
     static propTypes = {
-        children: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-        ]),
+        children: PropTypes.node,
         text: PropTypes.string,
         min: PropTypes.number,
         max: PropTypes.number,

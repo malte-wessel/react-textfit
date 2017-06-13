@@ -76,7 +76,7 @@ export default class App extends React.Component {
                     </div>
                     <div className="column-25">
                         <Textfit style={inlineStyle}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                            <strong>Lorem ipsum dolor sit amet</strong>, consetetur sadipscing elitr, <em>sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat</em>, sed diam voluptua. <b>At vero eos et accusam et justo duo dolores et ea rebum</b>. <br /> Stet clita kasd gubergren, <del>no sea takimata sanctus</del> est Lorem ipsum dolor sit amet. <mark>Lorem ipsum dolor sit amet</mark>, consetetur sadipscing elitr, <small>sed diam nonumy eirmod tempor invidunt ut</small> labore et dolore magna aliquyam erat, sed diam voluptua.
                         </Textfit>
                     </div>
                 </div>
