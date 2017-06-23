@@ -4,3 +4,8 @@ node_modules
 dist
 lib
 coverage
+
+# The following is for the gh-pages version
+/index.html
+/static
+/style.css
