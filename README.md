@@ -8,7 +8,7 @@ react-textfit
 * fit **headlines and paragraphs** into any element
 * **fast:** uses binary search for efficiently find the correct fit
 * **100%** react-goodness
-* works with **any style** configuration (line-height, padding, ...) and **JSX text formatting** (bold, italic, ...)
+* works with **any style** configuration (line-height, padding, ...)
 * **[check out the demo](http://malte-wessel.github.io/react-textfit/)**
 
 ## Table of Contents
@@ -69,7 +69,7 @@ class App extends Component {
   render() {
     return (
       <Textfit mode="multi">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem <strong>ipsum</strong> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </Textfit>
     );
   }
