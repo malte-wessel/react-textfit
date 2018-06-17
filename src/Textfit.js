@@ -209,6 +209,7 @@ export default class TextFit extends React.Component {
         const { fontSize, ready } = this.state;
         const finalStyle = {
             ...style,
+            display: 'block',
             fontSize: fontSize
         };
 
@@ -218,16 +219,16 @@ export default class TextFit extends React.Component {
         if (mode === 'single') wrapperStyle.whiteSpace = 'nowrap';
 
         return (
-            <div ref={c => this._parent = c} style={finalStyle} {...props}>
-                <div ref={c => this._child = c} style={wrapperStyle}>
+            <span ref={c => this._parent = c} style={finalStyle} {...props}>
+                <span ref={c => this._child = c} style={wrapperStyle}>
                     {text && typeof children === 'function'
                         ? ready
                             ? children(text)
                             : text
                         : children
                     }
-                </div>
-            </div>
+                </span>
+            </span>
         );
     }
 }
