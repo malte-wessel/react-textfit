@@ -55,11 +55,8 @@ export default class TextFit extends React.Component {
         ready: false
     }
 
-    componentWillMount() {
-        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
-    }
-
     componentDidMount() {
+        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
         const { autoResize } = this.props;
         if (autoResize) {
             window.addEventListener('resize', this.handleWindowResize);
