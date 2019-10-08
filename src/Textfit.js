@@ -83,11 +83,21 @@ export default class TextFit extends React.Component {
         this.pid = uniqueId();
     }
 
-    handleWindowResize = () => {
-        this.process();
+    handleWindowResize = (fitIndexesArray = undefined) => {
+        this.process(fitIndexesArray);
     }
 
-    process() {
+    process(fitIndexesArray = undefined) {
+        
+        // if have specific Textfit to resize, and this one is not one of them..
+        const fitElements =
+          fitIndexesArray &&
+          fitIndexesArray.detail &&
+          fitIndexesArray.detail.fitElements;
+        if (fitElements && !fitElements.includes(this._parent)) {
+          return;
+        }
+        
         const { min, max, mode, forceSingleModeWidth, onReady } = this.props;
         const el = this._parent;
         const wrapper = this._child;
