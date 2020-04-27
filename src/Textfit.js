@@ -48,15 +48,13 @@ export default class TextFit extends React.Component {
         if ('perfectFit' in props) {
             console.warn('TextFit property perfectFit has been removed.');
         }
+        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
+
     }
 
     state = {
         fontSize: null,
         ready: false
-    }
-
-    componentWillMount() {
-        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
     }
 
     componentDidMount() {
