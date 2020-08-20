@@ -55,10 +55,6 @@ export default class TextFit extends React.Component {
         ready: false
     }
 
-    componentWillMount() {
-        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
-    }
-
     componentDidMount() {
         const { autoResize } = this.props;
         if (autoResize) {
@@ -81,6 +77,10 @@ export default class TextFit extends React.Component {
         }
         // Setting a new pid will cancel all running processes
         this.pid = uniqueId();
+    }
+
+    'UNSAFE_componentWillMount'() {
+        this.handleWindowResize = throttle(this.handleWindowResize, this.props.throttle);
     }
 
     handleWindowResize = () => {
