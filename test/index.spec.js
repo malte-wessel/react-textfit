@@ -1,7 +1,7 @@
 import expect from 'expect';
 
 describe('Textfit', () => {
-    it('works', () => {
+    it('has a dummy test', () => {
         expect(true).toBe(true);
     });
 });
