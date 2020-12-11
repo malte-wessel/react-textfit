@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.1.1
+
+Maintenance release.
+
 ## v1.1.0
 
 * React 16 support.
@@ -23,6 +27,6 @@ Backwards-incompatible changes:
 Improvements:
 
 * React 15 support (#21).
-* More precise font-size computation (#22). 
+* More precise font-size computation (#22).
 * Fixed min and max (#1).
 * Removed warnings about invalid setState calls during resizing (#15).
