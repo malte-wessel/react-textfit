@@ -1,37 +1,40 @@
+import React from 'react';
+
 interface TextfitProps {
     /**
      * Minimum value for interpolation
      * Default: 1
      */
-    min: number,
+    min?: number,
     /**
      * Maximum value for interpolation
      * Default 100
      */
-    max: number,
+    max?: number,
     /**
      *  (single|multi) Algorithm to fit the text. Use single for headlines and multi for paragraphs. 
      *  Default is multi.
      */
-    mode: "multi" | "single",
+    mode?: "multi" | "single",
     /**
      * (Boolean) When mode is single and forceSingleModeWidth is true, the element's height will be ignored. 
      * Default is true.
      */
-    forceSingleModeWidth: boolean,
+    forceSingleModeWidth?: boolean,
     /**
      * (Number) Window resize throttle in milliseconds. Default is 50.
      */
-    throttle: number,
+    throttle?: number,
     /**
      * Auto resize. Adds a listener to the window if true to detect changes.
      * Default: false
      */
-    autoResize : boolean,
+    autoResize?: boolean,
     /**
      * (Function) Will be called when text is fitted.
      */
-    onReady:(finalFontSize: number )=>void,
+    onReady?:(finalFontSize: number )=>void,
+    children?: React.ReactNode;
 }
 
 /**
@@ -45,7 +48,7 @@ interface TextfitProps {
  * works with **any style** configuration (line-height, padding, ...)
  * **[check out the demo](http://malte-wessel.github.io/react-textfit/)**
  */
-const Textfit : (props:TextfitProps) => JSX.Element
+type Textfit = (props:TextfitProps) => JSX.Element
 
 export {Textfit}
 export default Textfit;
