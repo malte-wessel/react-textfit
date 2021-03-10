@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "React component to fit headlines and paragraphs into any element",
   "main": "lib/index.js",
+  "types":"index.d.ts",
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "babel src --out-dir lib",
