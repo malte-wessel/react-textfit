@@ -149,7 +149,7 @@ export default class TextFit extends React.Component {
                 low = min;
                 high = mid;
                 return whilst(
-                    () => low < high,
+                    () => low <= high,
                     whilstCallback => {
                         if (shouldCancelProcess()) return whilstCallback(true);
                         mid = parseInt((low + high) / 2, 10);
